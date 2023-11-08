@@ -1,0 +1,313 @@
+<!-- <!DOCTYPE html> -->
+<html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>VideoTools 3</title>
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+      <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}"/>
+      <!-- <script src="{{ url_for('static', filename='jquery-3.3.1.js') }}"></script> -->
+      <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+      <script src="{{ url_for('static', filename='socket.io-4.1.3.js') }}"></script>
+      <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </head>
+    <body>
+        <div id="container">
+<!-- ################################################################################################################################################################# -->
+            <div class="tile" id="tile1">
+
+                <div class="logo logo_label"><img id="logo_img" src="{{ url_for('static', filename='favicon.png') }}">VideoTools 3</div>
+                <div class="logo logo_button">
+                    <!-- <button class="button" id="tmp" style="cursor: pointer;" type="submit" value="">Help</button> -->
+                </div>
+
+                <div id="filelist_div">
+                    <select id="filelist" name="ddd" multiple size="13">
+                    </select>
+                </div>
+
+                <div class="cmd cmd_label">Media dst</div>
+                <div class="cmd cmd_parts2_1">
+                    <select class="parts2_dropdown" id="dropdown_media_dst">
+                        <!-- <option value="archive" selected>archive</option>
+                        <option value="rearchive">re-archive</option>
+                        <option value="temporary">temporary</option> -->
+                    </select>
+                </div>
+                <div class="cmd cmd_parts2_2">
+                    <button class="button" id="set_media_dst" style="cursor: pointer;" type="submit" value="">Set</button>
+                </div>
+
+                <div class="cmd cmd_label">Video stream</div>
+                <div class="cmd cmd_parts2_1">
+                    <select class="parts2_dropdown" id="dropdown_video_stream">
+                    </select>
+                </div>
+                <div class="cmd cmd_parts2_2">
+                    <button class="button" id="set_video_stream" style="cursor: pointer;" type="submit" value="">Set</button>
+                </div>
+
+                <div class="cmd cmd_label">Audio stream</div>
+                <div class="cmd cmd_parts2_1">
+                    <select class="parts2_dropdown" id="dropdown_audio_stream">
+                    </select>
+                </div>
+                <div class="cmd cmd_parts2_2">
+                    <button class="button" id="set_audio_stream" style="cursor: pointer;" type="submit" value="">Set</button>
+                </div>
+
+                <div class="cmd cmd_label">Subtitle stream pol</div>
+                <div class="cmd cmd_parts2_1">
+                    <select class="parts2_dropdown" id="dropdown_subtitle_stream_main">
+                    </select>
+                </div>
+                <div class="cmd cmd_parts2_2">
+                    <button class="button" id="set_subtitle_stream_main" style="cursor: pointer;" type="submit" value="">Set</button>
+                </div>
+
+                <div class="cmd cmd_label">Subtitle stream eng</div>
+                <div class="cmd cmd_parts2_1">
+                    <select class="parts2_dropdown" id="dropdown_subtitle_stream_additional">
+                    </select>
+                </div>
+                <div class="cmd cmd_parts2_2">
+                    <button class="button" id="set_subtitle_stream_additional" style="cursor: pointer;" type="submit" value="">Set</button>
+                </div>
+                
+                <div class="cmd cmd_label">Media start/stop</div>
+                <div class="cmd cmd_sub_start_stop_1">
+                    <input type="text" id="media_start_number" value="0"></input>
+                </div>
+                <div class="cmd cmd_sub_start_stop_2">
+                    <input type="text" id="media_stop_number" value="0"></input>
+                </div>
+                <div class="cmd cmd_sub_start_stop_3">
+                    <button class="button" id="media_start_stop_btn" style="cursor: pointer;" type="submit" value="">Set</button>
+                </div>
+
+                <div class="cmd cmd_label">Subtitle show faster/slower</div>
+                <div class="cmd cmd_sub_time_drift_1">
+                    <select id="sub_time_drift_dropdown">
+                        <option value="main" selected>pol</option>
+                        <option value="additional">eng</option>
+                    </select>
+                </div>
+                <div class="cmd cmd_sub_time_drift_2">
+                    <input type="number" id="sub_time_drift_number" name="time" value="0.5" min="0.1" step="0.1"></input>
+                </div>
+                <div class="cmd cmd_sub_time_drift_4">
+                    <button class="button" id="sub_time_drift_btn" style="cursor: pointer;" type="submit" name="backward">Backward</button>
+                </div>
+                <div class="cmd cmd_sub_time_drift_3">
+                    <button class="button" id="sub_time_drift_btn" style="cursor: pointer;" type="submit" name="forward">Forward</button>
+                </div>
+
+                <div class="cmd cmd_label">Detect resolution</div>
+                <div class="cmd cmd_parts1_type1">
+                    <button class="button btn_detect_resolution" style="cursor: pointer;" type="submit" value="start">Start</button>
+                </div>
+
+
+                <div class="cmd cmd_label">Extract HDR+ data</div>
+                <div class="cmd cmd_parts1_type1">
+                    <button class="button btn_extract_hdrplus" style="cursor: pointer;" type="submit" value="start">Start</button>
+                </div>
+
+                <div class="cmd cmd_label">Convert video</div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_convert_video" style="cursor: pointer;" type="submit" value="start">Start</button>
+                </div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_convert_video" style="cursor: pointer;" type="submit" value="stop">Stop</button>
+                </div>
+
+                <div class="cmd cmd_label">Extract subtitles</div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_extract_subtitles" style="cursor: pointer;" type="submit" value="start">Start</button>
+                </div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_extract_subtitles" style="cursor: pointer;" type="submit" value="stop">Stop</button>
+                </div>
+
+                <div class="cmd cmd_label">Extract audio</div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_extract_audio" style="cursor: pointer;" type="submit" value="start">Start</button>
+                </div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_extract_audio" style="cursor: pointer;" type="submit" value="stop">Stop</button>
+                </div>
+
+                <div class="cmd cmd_label">Convert audio</div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_convert_audio" style="cursor: pointer;" type="submit" value="start">Start</button>
+                </div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_convert_audio" style="cursor: pointer;" type="submit" value="stop">Stop</button>
+                </div>
+
+                <div class="cmd cmd_label">Download polish subtitles</div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_download_subtitles_main" style="cursor: pointer;" type="submit" value="start">Start</button>
+                </div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_download_subtitles_main" style="cursor: pointer;" type="submit" value="stop">Stop</button>
+                </div>
+
+                <div class="cmd cmd_label">Download english subtitles</div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_download_subtitles_additional" style="cursor: pointer;" type="submit" value="start">Start</button>
+                </div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_download_subtitles_additional" style="cursor: pointer;" type="submit" value="stop">Stop</button>
+                </div>
+
+                <div class="cmd cmd_label">Download voiceover</div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_download_voiceover" style="cursor: pointer;" type="submit" value="start">Start</button>
+                </div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_download_voiceover" style="cursor: pointer;" type="submit" value="stop">Stop</button>
+                </div>
+
+                <div class="cmd cmd_label">Create voiceover</div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_create_voiceover" style="cursor: pointer;" type="submit" value="start">Start</button>
+                </div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_create_voiceover" style="cursor: pointer;" type="submit" value="stop">Stop</button>
+                </div>
+
+                <div class="cmd cmd_label">Convert voiceover audio</div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_convert_voiceover_audio" style="cursor: pointer;" type="submit" value="start">Start</button>
+                </div>
+                <div class="cmd cmd_parts2_type1">
+                    <button class="button btn_convert_voiceover_audio" style="cursor: pointer;" type="submit" value="stop">Stop</button>
+                </div>
+
+                <div class="cmd cmd_label">Mux</div>
+                <div class="cmd cmd_parts1_type1">
+                    <button class="button btn_mux" style="cursor: pointer;" type="submit" value="start">Start</button>
+                </div>
+
+                <div class="cmd cmd_label">Move files</div>
+                <div class="cmd cmd_parts1_type1">
+                    <button class="button btn_move_files" style="cursor: pointer;" type="submit" value="start">Start</button>
+                </div>
+
+
+                
+                <div class="cmd cmd_label" padding: 10px>Show media info</div>
+                <div class="cmd cmd_parts1_type1">
+                    <button class="button" id="show_media_info" style="cursor: pointer;" type="submit" value="">Run</button>
+                </div>
+
+                <div class="cmd cmd_label">Test conversion</div>
+                <div class="cmd cmd_parts1_type1">
+                    <button class="button" id="test_conversion" style="cursor: pointer;" type="submit" value="">Run</button>
+                </div>
+                
+                <!-- <div class="cmd cmd_label">Recreate database</div>
+                <div class="cmd cmd_parts1_type1">
+                    <button class="button" id="recreate_database" style="cursor: pointer;" type="submit" value="">Run</button>
+                </div> -->
+
+                <!-- <div class="cmd cmd_label">test_a</div>
+                <div class="cmd cmd_parts1_type1">
+                    <button class="button" id="test_a" style="cursor: pointer;" type="submit" value="">Run</button>
+                </div> -->
+
+
+            </div>
+<!-- ################################################################################################################################################################# -->
+            <div class="tile" id="tile2">
+                
+                <div class="media_info_tile" id="mi_tile1">
+                    <div id="media_info">
+                        <div class="line_comm line_info">src_filename_extension:</div><div class="line_comm line_data" id="src_filename_extension"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">src_size:</div><div class="line_comm line_data" id="src_size"></div><div style="clear: both;"></div>
+                        <!-- <div class="line_comm line_info">src_file_path:</div><div class="line_comm line_data" id="src_file_path"></div><div style="clear: both;"></div> -->
+                        <!-- <div class="line_comm line_info">src_filename:</div><div class="line_comm line_data" id="src_filename"></div><div style="clear: both;"></div> -->
+                        <!-- <div class="line_comm line_info">src_extension:</div><div class="line_comm line_data" id="src_extension"></div><div style="clear: both;"></div> -->
+                        <div class="line_comm line_info">dst_directory:</div><div class="line_comm line_data" id="dst_directory"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">dst_filename:</div><div class="line_comm line_data" id="dst_filename"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">base_directory:</div><div class="line_comm line_data" id="base_directory"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">base_filename:</div><div class="line_comm line_data" id="base_filename"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">media_dst:</div><div class="line_comm line_data" id="media_dst"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">video_type:</div><div class="line_comm line_data" id="video_type"></div><div style="clear: both;"></div>
+                        <!-- <div class="line_comm line_info">directory:</div><div class="line_comm line_data" id="directory"></div><div style="clear: both;"></div> -->
+                        <!-- <div class="line_comm line_info">directory_temp:</div><div class="line_comm line_data" id="directory_temp"></div><div style="clear: both;"></div> -->
+                        <div class="line_comm line_info">directory_tts:</div><div class="line_comm line_data" id="directory_tts"></div><div style="clear: both;"></div>
+                        <!-- <div class="line_comm line_info">directory_done:</div><div class="line_comm line_data" id="directory_done"></div><div style="clear: both;"></div> -->
+                        <div class="line_comm line_info">directory_archive:</div><div class="line_comm line_data" id="directory_archive"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">directory_final:</div><div class="line_comm line_data" id="directory_final"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">directory_final_meta:</div><div class="line_comm line_data" id="directory_final_meta"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">title:</div><div class="line_comm line_data" id="title"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">video_stream:</div><div class="line_comm line_data" id="video_stream"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">audio_stream:</div><div class="line_comm line_data" id="audio_stream"></div><div style="clear: both;"></div>
+                        <!-- <div class="line_comm line_info">video_frame_rate:</div><div class="line_comm line_data" id="video_frame_rate"></div><div style="clear: both;"></div> -->
+                        <div class="line_comm line_info">subtitle_stream_main:</div><div class="line_comm line_data" id="subtitle_stream_main"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">subtitle_stream_additional:</div><div class="line_comm line_data" id="subtitle_stream_additional"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">video_duration:</div><div class="line_comm line_data" id="video_duration"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">audio_duration:</div><div class="line_comm line_data" id="audio_duration"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">video_delay:</div><div class="line_comm line_data" id="video_delay"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">audio_delay:</div><div class="line_comm line_data" id="audio_delay"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">audio_language:</div><div class="line_comm line_data" id="audio_language"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">audio_channels:</div><div class="line_comm line_data" id="audio_channels"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">dst_audio_channels:</div><div class="line_comm line_data" id="dst_audio_channels"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">hdr:</div><div class="line_comm line_data" id="hdr"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">dhdr:</div><div class="line_comm line_data" id="dhdr"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">imax:</div><div class="line_comm line_data" id="imax"></div><div style="clear: both;"></div>
+                        
+                    </div>
+                </div>
+                <div class="media_info_tile" id="mi_space"></div>
+                <div class="media_info_tile" id="mi_tile2">
+                    <div id="media_info">
+                        
+                        <div class="line_comm line_info">max_cll:</div><div class="line_comm line_data" id="max_cll"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">master_display:</div><div class="line_comm line_data" id="master_display"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">src_width:</div><div class="line_comm line_data" id="src_width"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">src_height:</div><div class="line_comm line_data" id="src_height"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">real_width:</div><div class="line_comm line_data" id="real_width"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">real_height:</div><div class="line_comm line_data" id="real_height"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">dst_width:</div><div class="line_comm line_data" id="dst_width"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">dst_height:</div><div class="line_comm line_data" id="dst_height"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">dst_bitrate:</div><div class="line_comm line_data" id="dst_bitrate"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">start_at:</div><div class="line_comm line_data" id="start_at"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">stop_at:</div><div class="line_comm line_data" id="stop_at"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">cut_str:</div><div class="line_comm line_data" id="cut_str"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">extract_hdrplus_state:</div><div class="line_comm line_data" id="extract_hdrplus_state"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">extract_audio_state:</div><div class="line_comm line_data" id="extract_audio_state"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">subtitle_main_state:</div><div class="line_comm line_data" id="subtitle_main_state"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">subtitle_additional_state:</div><div class="line_comm line_data" id="subtitle_additional_state"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">download_voiceover_state:</div><div class="line_comm line_data" id="download_voiceover_state"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">create_voiceover_state:</div><div class="line_comm line_data" id="create_voiceover_state"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">convert_video_state:</div><div class="line_comm line_data" id="convert_video_state"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">convert_audio_state:</div><div class="line_comm line_data" id="convert_audio_state"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">convert_audio_voiceover_state:</div><div class="line_comm line_data" id="convert_audio_voiceover_state"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">mux_state:</div><div class="line_comm line_data" id="mux_state"></div><div style="clear: both;"></div>
+                        <div class="line_comm line_info">move_files_state:</div><div class="line_comm line_data" id="move_files_state"></div><div style="clear: both;"></div>
+                    </div>
+                </div>
+
+            </div>
+<!-- ################################################################################################################################################################# -->
+            <div class="tile" id="tile3">
+                <div id='box_logger'>
+                    <div class="in_log_stack" id="in_log_row1">
+                        <textarea readonly id='logger_area'></textarea>
+                    </div>
+                    <div class="in_log_stack spacer"></div>
+                    <div class="in_log_stack" id="in_log_row2">
+                        <div class="ils1_column"><!-- Logging... --></div>
+                        <div class="ils1_column">
+                            <button class="button" id="clear_logger" style="cursor: pointer;" type="submit" value="Clear">Clear</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!-- ################################################################################################################################################################# -->
+        </div>
+    </body>
+</html>
